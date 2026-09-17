@@ -62,3 +62,4 @@ mismas
 cambio en el pipeline
 
 3. Agregar un badge con el estado del pipeline
+[CI](https://github.com/santi440/mw-insecure-node-app/actions/workflows/ci.yml/badge.svg)
