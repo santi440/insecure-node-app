@@ -62,4 +62,6 @@ mismas
 cambio en el pipeline
 
 3. Agregar un badge con el estado del pipeline
-[CI](https://github.com/santi440/mw-insecure-node-app/actions/workflows/ci.yml/badge.svg)
+
+
+[![CI/CD Security Pipeline](https://github.com/santi440/insecure-node-app/actions/workflows/ci.yml/badge.svg)](https://github.com/santi440/insecure-node-app/actions/workflows/ci.yml)
