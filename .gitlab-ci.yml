@@ -1,0 +1,41 @@
+stages: [test, lint, security]
+
+include:
+  - component: $CI_SERVER_FQDN/components/secret-detection/secret-detection@v2
+    inputs:
+      stage: security
+  - component: $CI_SERVER_FQDN/components/trivy-scanner/trivy-scanner@v1
+    inputs:
+      stage: security
+      severity: 'HIGH,CRITICAL'
+
+variables:
+  NODE_VERSION: '22.16.0'
+
+test:
+  stage: test
+  image: node:22.16.0
+  variables:
+    API_KEY: $API_KEY
+  script:
+    - npm ci
+    - npm test
+
+lint:
+  stage: lint
+  image: node:22.16.0
+  script:
+    - npm ci
+    - npm run lint
+
+npm-audit:
+  stage: security
+  image: node:22.16.0
+  script:
+    - npm ci
+    - npm audit --audit-level=high --json > audit-report.json || true
+    - npm audit --audit-level=high
+  artifacts:
+    paths: [audit-report.json]
+    expire_in: 1 week
+    when: always
